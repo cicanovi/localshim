@@ -1,0 +1,32 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 5413
+  },
+  "backend": {
+    "url": "http://127.0.0.1:8080"
+  },
+  "plugins": {
+    "upstream": [
+      {
+        "name": "inject_system_prompt",
+        "source": "plugins/inject.py",
+        "entrypoint": "InjectSystemPrompt",
+        "enabled": true,
+        "fail_mode": "abort",
+        "timeout_seconds": null,
+        "params": {
+          "content": "Respond concisely.",
+          "skip_if_system_exists": false
+        }
+      }
+    ],
+    "downstream": []
+  },
+  "pipeline": {
+    "in_flight_policy": "drain",
+    "max_replays_per_request": 0,
+    "max_retries_per_request": 0,
+    "max_reattempts_per_request": 0
+  }
+}
